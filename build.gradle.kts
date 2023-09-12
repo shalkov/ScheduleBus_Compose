@@ -14,10 +14,9 @@ buildscript {
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.jvm) apply false
-    alias(libs.plugins.sample.android.application) apply false
-    alias(libs.plugins.sample.android.library) apply false
-    alias(libs.plugins.sample.android.test) apply false
-    alias(libs.plugins.sample.compose) apply false
-    //alias(libs.plugins.sample.dynamic) apply false
+    alias(libs.plugins.schedulebus.android.application) apply false
+    alias(libs.plugins.schedulebus.android.library) apply false
+    alias(libs.plugins.schedulebus.android.test) apply false
+    alias(libs.plugins.schedulebus.compose) apply false
 }
 true // Needed to make the Suppress annotation work for the plugins block

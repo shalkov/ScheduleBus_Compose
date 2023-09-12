@@ -1,7 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION") // Remove when fixed https://youtrack.jetbrains.com/issue/KTIJ-19369
 plugins {
-    alias(libs.plugins.sample.android.application)
-    alias(libs.plugins.sample.compose)
+    alias(libs.plugins.schedulebus.android.application)
+    alias(libs.plugins.schedulebus.compose)
 }
 
 android {
@@ -10,8 +10,6 @@ android {
     defaultConfig {
         applicationId = "ru.shalkoff.schedulebus"
     }
-
-   // dynamicFeatures += setOf(":dynamic")
 }
 
 dependencies {
@@ -32,6 +30,4 @@ dependencies {
     // Compose
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
-
-    //implementation(libs.google.play.feature.delivery)
 }

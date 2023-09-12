@@ -16,28 +16,24 @@ dependencies {
 
 gradlePlugin {
     /**
-     * Register convention plugins so they are available in the build scripts of the application
+     * Регистрация пользовательских плагинов
      */
     plugins {
-        register("sampleAndroidApplication") {
-            id = "sample.android.application"
+        register("schedulebusAndroidApplication") {
+            id = "schedulebus.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
-        register("sampleAndroidLibrary") {
-            id = "sample.android.library"
+        register("schedulebusAndroidLibrary") {
+            id = "schedulebus.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
-        register("sampleAndroidTest") {
-            id = "sample.android.test"
+        register("schedulebusAndroidTest") {
+            id = "schedulebus.android.test"
             implementationClass = "AndroidTestConventionPlugin"
         }
-        register("sampleCompose") {
-            id = "sample.compose"
+        register("schedulebusCompose") {
+            id = "schedulebus.compose"
             implementationClass = "ComposeConventionPlugin"
         }
-//        register("sampleDynamic") {
-//            id = "sample.dynamic"
-//            implementationClass = "DynamicFeatureConventionPlugin"
-//        }
     }
 }

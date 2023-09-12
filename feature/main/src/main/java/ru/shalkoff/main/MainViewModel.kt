@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
 
     //TODO
     val uiState: StateFlow<MainUiState> = savedStateHandle
-        .getStateFlow<Long?>("id", 1)
+        .getStateFlow<Long?>("id", 2)
         .filterNotNull()
         .flatMapLatest { id ->
             scheduleRepository.observeModelById(id)

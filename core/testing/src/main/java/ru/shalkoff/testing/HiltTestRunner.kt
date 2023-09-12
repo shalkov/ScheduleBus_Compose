@@ -6,7 +6,7 @@ import androidx.test.runner.AndroidJUnitRunner
 import dagger.hilt.android.testing.HiltTestApplication
 
 /**
- * A custom runner to set up the instrumented application class for tests.
+ * Кастомный раннер для инструментальных тестов
  */
 class HiltTestRunner : AndroidJUnitRunner() {
 
