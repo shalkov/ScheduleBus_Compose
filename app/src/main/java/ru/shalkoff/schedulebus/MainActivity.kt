@@ -12,6 +12,7 @@ import ru.shalkoff.schedulebus.ui.theme.ScheduleBusTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

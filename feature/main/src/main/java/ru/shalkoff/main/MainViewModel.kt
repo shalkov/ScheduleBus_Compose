@@ -2,38 +2,35 @@ package ru.shalkoff.main
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import ru.shalkoff.data.ScheduleRepository
+import ru.shalkoff.ui.bottombar.BottomNavItem
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val scheduleRepository: ScheduleRepository,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    //TODO
-    val uiState: StateFlow<MainUiState> = savedStateHandle
-        .getStateFlow<Long?>("id", 2)
-        .filterNotNull()
-        .flatMapLatest { id ->
-            scheduleRepository.observeModelById(id)
-        }.map { model ->
-            MainUiState.Success(
-                title = model.title,
-                description = model.description
-            )
+    val tabs = listOf(
+        BottomNavItem.HomeTabItem,
+        BottomNavItem.HeartTabItem,
+        BottomNavItem.ProfileTabItem
+    )
+
+    private val _uiState = MutableStateFlow<MainUiState>(MainUiState.HomeTabSelected)
+    val uiState: StateFlow<MainUiState> = _uiState
+
+    fun onTabSelected(tab: BottomNavItem) {
+        _uiState.value = tab.mapToEvent()
+    }
+
+    private fun BottomNavItem.mapToEvent(): MainUiState {
+        return when (this) {
+            BottomNavItem.HomeTabItem -> MainUiState.HomeTabSelected
+            BottomNavItem.HeartTabItem -> MainUiState.HeartTabSelected
+            BottomNavItem.ProfileTabItem -> MainUiState.ProfileTabSelected
         }
-        .stateIn(
-            viewModelScope,
-            SharingStarted.WhileSubscribed(5000),
-            MainUiState.Loading
-        )
+    }
 }

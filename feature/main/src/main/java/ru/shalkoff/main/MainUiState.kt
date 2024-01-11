@@ -1,9 +1,10 @@
 package ru.shalkoff.main
 
 sealed interface MainUiState {
-    object Loading : MainUiState
-    data class Success(
-        val title: String,
-        val description: String
-    ) : MainUiState
+
+    object HomeTabSelected : MainUiState
+    object HeartTabSelected : MainUiState
+    object ProfileTabSelected : MainUiState
 }
+
+

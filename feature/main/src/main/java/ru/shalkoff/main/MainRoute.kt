@@ -1,21 +1,20 @@
 package ru.shalkoff.main
 
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.CenterAlignedTopAppBar
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.testTag
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.shalkoff.main.tabs.home.HomeTabRoute
 import ru.shalkoff.ui.Loading
+import ru.shalkoff.ui.bottombar.DropletButtonNavBar
 
 @Composable
 fun MainRoute(
@@ -23,42 +22,61 @@ fun MainRoute(
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = hiltViewModel()
 ) {
-    val state by viewModel.uiState.collectAsState()
-    MainScreen(state, onGoBack, modifier)
+    val uiState by viewModel.uiState.collectAsState()
+
+    MainScreen(
+        viewModel = viewModel,
+        uiState = uiState,
+        modifier = modifier
+    )
 }
 
-@Composable
-internal fun MainScreen(
-    state: MainUiState,
-    onGoBack: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    when (state) {
-        MainUiState.Loading -> Loading(modifier)
-        is MainUiState.Success -> Content(state, onGoBack, modifier)
-    }
-}
-
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-internal fun Content(
-    state: MainUiState.Success,
-    onGoBack: () -> Unit,
+internal fun MainScreen(
+    viewModel: MainViewModel,
+    uiState: MainUiState,
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(state.title) },
-                navigationIcon = {
-                    IconButton(onGoBack, modifier = Modifier.testTag("nav_icon")) {
-                        Icon(Icons.Default.ArrowBack, null)
-                    }
+        content = {
+            when (uiState) {
+                MainUiState.HomeTabSelected -> {
+                    HomeTabRoute(onGoBack = { })
+                }
+
+                MainUiState.HeartTabSelected -> {
+                    Loading()
+                }
+
+                MainUiState.ProfileTabSelected -> {
+                    Loading()
+                }
+            }
+        },
+        bottomBar = {
+            AppBottomNavigation(viewModel)
+        }
+    )
+}
+
+@Composable
+internal fun AppBottomNavigation(
+    viewModel: MainViewModel
+) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            modifier = Modifier.align(Alignment.BottomCenter)
+        ) {
+            DropletButtonNavBar(
+                dropletButtons = viewModel.tabs,
+                onClick = { bottomItem ->
+                    viewModel.onTabSelected(bottomItem)
                 }
             )
-        },
-        modifier = modifier
-    ) { padding ->
-        Text(state.description, Modifier.padding(padding))
+        }
     }
 }

@@ -11,4 +11,7 @@ android {
 dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
+
+    //Bottom Navigation Bar
+    implementation(libs.animated.navigation.bar)
 }
