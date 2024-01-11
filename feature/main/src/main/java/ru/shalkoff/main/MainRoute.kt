@@ -12,8 +12,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
+import ru.shalkoff.main.tabs.heart.HeartTabRoute
 import ru.shalkoff.main.tabs.home.HomeTabRoute
-import ru.shalkoff.ui.Loading
+import ru.shalkoff.main.tabs.profile.ProfileTabRoute
 import ru.shalkoff.ui.bottombar.DropletButtonNavBar
 
 @Composable
@@ -47,11 +48,11 @@ internal fun MainScreen(
                 }
 
                 MainUiState.HeartTabSelected -> {
-                    Loading()
+                    HeartTabRoute()
                 }
 
                 MainUiState.ProfileTabSelected -> {
-                    Loading()
+                    ProfileTabRoute()
                 }
             }
         },
