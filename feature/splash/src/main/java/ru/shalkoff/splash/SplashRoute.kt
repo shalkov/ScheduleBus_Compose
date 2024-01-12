@@ -24,14 +24,17 @@ fun SplashRoute(
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
-    LaunchedEffect(Unit) {
-        viewModel.uiState.collectLatest {
-            if (it == SplashUiState.Success) {
+    val uiState by viewModel.uiState.collectAsState()
+    when (uiState) {
+        SplashUiState.Loading -> {
+            AnimateLogoContent(splashLogo)
+        }
+        SplashUiState.Success -> {
+            LaunchedEffect(Unit) {
                 openNextScreen()
             }
         }
     }
-    AnimateLogoContent(splashLogo)
 }
 
 @Composable

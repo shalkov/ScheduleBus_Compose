@@ -12,7 +12,9 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow<SplashUiState>(SplashUiState.Loading)
+    private val _uiState = MutableStateFlow<SplashUiState>(
+        SplashUiState.Loading
+    )
     val uiState: StateFlow<SplashUiState> = _uiState
 
     init {

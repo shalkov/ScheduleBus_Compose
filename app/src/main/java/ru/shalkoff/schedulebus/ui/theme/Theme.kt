@@ -15,14 +15,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
-)
-
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
+    primary = RegentGrey,
     secondary = PurpleGrey40,
     tertiary = Pink40
 
@@ -37,11 +31,17 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val DarkColorScheme = darkColorScheme(
+    primary = RegentGreyDark,
+    secondary = PurpleGrey80,
+    tertiary = Pink80
+)
+
 @Composable
 fun ScheduleBusTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
