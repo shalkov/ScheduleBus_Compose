@@ -5,14 +5,17 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import ru.shalkoff.data.ScheduleRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileTabViewModel @Inject constructor() : ViewModel(), DefaultLifecycleObserver {
+class ProfileViewModel @Inject constructor(
+    private val repository: ScheduleRepository
+) : ViewModel(), DefaultLifecycleObserver {
 
     private var _uiState = MutableStateFlow<ProfileUiState>(
         ProfileUiState.Loading
@@ -21,10 +24,10 @@ class ProfileTabViewModel @Inject constructor() : ViewModel(), DefaultLifecycleO
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _uiState.tryEmit(ProfileUiState.Loading)
-            delay(1000)
-            _uiState.tryEmit(ProfileUiState.ShowContent)
+            val cats = repository.getCats(10)
+            _uiState.tryEmit(ProfileUiState.ShowContent(cats))
         }
     }
 }

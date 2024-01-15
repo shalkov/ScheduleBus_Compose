@@ -11,12 +11,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import coil.compose.AsyncImage
 import ru.shalkoff.ui.Loading
 import ru.shalkoff.ui.extension.observeLifecycleEvents
 
 @Composable
 fun ProfileTabRoute(
-    viewModel: ProfileTabViewModel = hiltViewModel()
+    viewModel: ProfileViewModel = hiltViewModel()
 ) {
     viewModel.observeLifecycleEvents(LocalLifecycleOwner.current.lifecycle)
 
@@ -29,10 +30,10 @@ internal fun ProfileScreen(
     uiState: ProfileUiState
 ) {
     when (uiState) {
-        ProfileUiState.Loading -> {
+        is ProfileUiState.Loading -> {
             Loading()
         }
-        ProfileUiState.ShowContent -> {
+        is ProfileUiState.ShowContent -> {
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize()
@@ -40,6 +41,10 @@ internal fun ProfileScreen(
                 Text(
                     text = "Профиль в разработке",
                     fontSize = 16.sp
+                )
+                AsyncImage(
+                    model = uiState.cats[0].url,
+                    contentDescription = "The delasign logo",
                 )
             }
         }

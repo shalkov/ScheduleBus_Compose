@@ -4,9 +4,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.map
+import ru.shalkoff.network.CatResponse
+import ru.shalkoff.network.CatsApi
 import javax.inject.Inject
 
-class ScheduleRepository @Inject constructor() : IScheduleRepository {
+class ScheduleRepository @Inject constructor(
+    private val catsApi: CatsApi
+) : IScheduleRepository {
+
+    suspend fun getCats(count: Int): List<CatResponse> {
+        return catsApi.getCats(count)
+    }
 
     private val allItems: MutableStateFlow<List<ScheduleResponse>> = MutableStateFlow(
         listOf(

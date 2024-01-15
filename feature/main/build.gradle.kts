@@ -16,4 +16,7 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Image Loader Async
+    implementation(libs.coil.image.loader)
 }

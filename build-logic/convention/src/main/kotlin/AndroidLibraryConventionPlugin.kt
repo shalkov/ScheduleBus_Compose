@@ -15,6 +15,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
                 apply("dagger.hilt.android.plugin")
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.kapt")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             extensions.configure<LibraryExtension> {
@@ -24,6 +25,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
             dependencies {
                 add("implementation", libs.findLibrary("hilt.android").get())
+                add("implementation", libs.findLibrary("kotlin.serialization").get())
                 add("kapt", libs.findLibrary("hilt.compiler").get())
                 add("androidTestImplementation", libs.findLibrary("hilt.android.testing").get())
                 add("kaptAndroidTest", libs.findLibrary("hilt.android.compiler").get())

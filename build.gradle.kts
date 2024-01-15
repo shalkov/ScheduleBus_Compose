@@ -14,6 +14,7 @@ buildscript {
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
     alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.serialization) apply true
     alias(libs.plugins.schedulebus.android.application) apply false
     alias(libs.plugins.schedulebus.android.library) apply false
     alias(libs.plugins.schedulebus.android.test) apply false

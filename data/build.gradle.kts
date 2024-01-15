@@ -13,4 +13,12 @@ dependencies {
     // Unit testing
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    //Ktor Client
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.json)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.content.negotiation)
 }

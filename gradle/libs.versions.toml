@@ -18,6 +18,9 @@ junit = "4.13.2"
 kotlin = "1.8.10"
 lottieAnimation = "5.2.0"
 animatedNavigationBar = "1.0.0"
+ktorClientVersion = "2.3.7"
+coilImageVersion = "2.4.0"
+kotlinSerializationJsonVersion = "1.6.0"
 
 [libraries]
 android-tools-build-gradle-plugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
@@ -46,6 +49,14 @@ kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 lottie-animation-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieAnimation" }
 animated-navigation-bar = { module = "com.exyte:animated-navigation-bar", version.ref = "animatedNavigationBar" }
+ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktorClientVersion" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientVersion" }
+ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktorClientVersion" }
+ktor-client-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktorClientVersion" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktorClientVersion" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorClientVersion" }
+coil-image-loader = { module = "io.coil-kt:coil-compose", version.ref = "coilImageVersion" }
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinSerializationJsonVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -55,6 +66,7 @@ hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 schedulebus-android-application = { id = "schedulebus.android.application", version = "unspecified" }
 schedulebus-android-library = { id = "schedulebus.android.library", version = "unspecified" }
