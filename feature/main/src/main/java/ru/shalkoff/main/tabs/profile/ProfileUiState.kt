@@ -4,7 +4,7 @@ import ru.shalkoff.network.CatResponse
 
 sealed interface ProfileUiState {
 
-    object Loading: ProfileUiState
+    data object Loading: ProfileUiState
     data class ShowContent(
         val cats: List<CatResponse>
     ): ProfileUiState

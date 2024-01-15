@@ -2,6 +2,6 @@ package ru.shalkoff.main.tabs.heart
 
 sealed interface HeartUiState {
 
-    object Loading : HeartUiState
-    object ShowContent : HeartUiState
+    data object Loading : HeartUiState
+    data object ShowContent : HeartUiState
 }

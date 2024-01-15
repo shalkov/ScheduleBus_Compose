@@ -1,6 +1,7 @@
 package ru.shalkoff.splash
 
 sealed interface SplashUiState {
-    object Loading : SplashUiState
-    object Success : SplashUiState
+
+    data object Loading : SplashUiState
+    data object Success : SplashUiState
 }

@@ -33,7 +33,6 @@ fun MainRoute(
 }
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MainScreen(
     viewModel: MainViewModel,
