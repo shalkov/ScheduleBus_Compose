@@ -1,51 +1,74 @@
 package ru.shalkoff.main.tabs.profile
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalLifecycleOwner
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import ru.shalkoff.ui.Loading
 import ru.shalkoff.ui.extension.observeLifecycleEvents
 
 @Composable
 fun ProfileTabRoute(
+    innerPaddingValues: PaddingValues,
     viewModel: ProfileViewModel = hiltViewModel()
 ) {
     viewModel.observeLifecycleEvents(LocalLifecycleOwner.current.lifecycle)
 
     val uiState by viewModel.uiState.collectAsState()
-    ProfileScreen(uiState)
+    ProfileScreen(
+        innerPaddingValues,
+        uiState
+    )
 }
 
 @Composable
 internal fun ProfileScreen(
+    innerPaddingValues: PaddingValues,
     uiState: ProfileUiState
 ) {
     when (uiState) {
         is ProfileUiState.Loading -> {
             Loading()
         }
+
         is ProfileUiState.ShowContent -> {
-            Box(
-                contentAlignment = Alignment.Center,
-                modifier = Modifier.fillMaxSize()
+            LazyColumn(
+                modifier = Modifier
+                    .padding(
+                        bottom = innerPaddingValues.calculateBottomPadding()
+                    )
+
             ) {
-                Text(
-                    text = "Профиль в разработке",
-                    fontSize = 16.sp
-                )
-                AsyncImage(
-                    model = uiState.cats[0].url,
-                    contentDescription = "The delasign logo",
-                )
+                items(count = uiState.cats.size) {
+                    SubcomposeAsyncImage(
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .height(256.dp)
+                            .fillMaxWidth()
+                            .clip(shape = RoundedCornerShape(16.dp, 16.dp, 16.dp, 16.dp))
+                            .background(Color.LightGray),
+                        model = uiState.cats[it].url,
+                        loading = {
+                            Loading()
+                        },
+                        contentDescription = "The delasign logo"
+                    )
+                }
             }
         }
     }

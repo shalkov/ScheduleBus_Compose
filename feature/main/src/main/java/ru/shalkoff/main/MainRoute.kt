@@ -32,7 +32,6 @@ fun MainRoute(
     )
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 internal fun MainScreen(
     viewModel: MainViewModel,
@@ -40,7 +39,7 @@ internal fun MainScreen(
     modifier: Modifier = Modifier
 ) {
     Scaffold(
-        content = {
+        content = { innerPadding ->
             when (uiState) {
                 MainUiState.HomeTabSelected -> {
                     HomeTabRoute(onGoBack = { })
@@ -51,7 +50,7 @@ internal fun MainScreen(
                 }
 
                 MainUiState.ProfileTabSelected -> {
-                    ProfileTabRoute()
+                    ProfileTabRoute(innerPadding)
                 }
             }
         },
@@ -65,9 +64,7 @@ internal fun MainScreen(
 internal fun AppBottomNavigation(
     viewModel: MainViewModel
 ) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Box {
         Column(
             modifier = Modifier.align(Alignment.BottomCenter)
         ) {

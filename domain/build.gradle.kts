@@ -4,12 +4,10 @@ plugins {
 }
 
 android {
-    namespace = "ru.shalkoff.core.data"
+    namespace = "ru.shalkoff.core.domain"
 }
 
 dependencies {
-    implementation(project(":domain"))
-
     implementation(libs.kotlinx.coroutines.android)
 
     // Unit testing

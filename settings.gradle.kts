@@ -17,6 +17,7 @@ dependencyResolutionManagement {
 rootProject.name = "ScheduleBus"
 include(":app")
 include(":data")
+include(":domain")
 include(":core:ui")
 include(":core:util")
 include(":core:testing")

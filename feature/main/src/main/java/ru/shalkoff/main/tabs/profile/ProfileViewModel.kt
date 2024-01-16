@@ -9,12 +9,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.shalkoff.data.ScheduleRepository
+import ru.shalkoff.usecase.GetCatsUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val repository: ScheduleRepository
+    private val getCatsUseCase: GetCatsUseCase
 ) : ViewModel(), DefaultLifecycleObserver {
 
     private var _uiState = MutableStateFlow<ProfileUiState>(
@@ -26,7 +26,7 @@ class ProfileViewModel @Inject constructor(
         super.onResume(owner)
         viewModelScope.launch(Dispatchers.IO) {
             _uiState.tryEmit(ProfileUiState.Loading)
-            val cats = repository.getCats(10)
+            val cats = getCatsUseCase(10)
             _uiState.tryEmit(ProfileUiState.ShowContent(cats))
         }
     }

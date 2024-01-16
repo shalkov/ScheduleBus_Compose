@@ -1,11 +1,11 @@
 package ru.shalkoff.di
 
-import ru.shalkoff.data.IScheduleRepository
+import ru.shalkoff.repository.IScheduleRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import ru.shalkoff.data.ScheduleRepository
+import ru.shalkoff.repository.ScheduleRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
