@@ -14,6 +14,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.shalkoff.ui.Loading
 
@@ -49,7 +52,12 @@ internal fun Content(
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
-                title = { Text(state.title) },
+                title = { Text(
+                    modifier = Modifier.padding(start = 16.dp),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    text = state.title
+                ) },
                 navigationIcon = {
                     IconButton(onGoBack, modifier = Modifier.testTag("nav_icon")) {
                         Icon(Icons.Default.ArrowBack, null)
@@ -59,6 +67,19 @@ internal fun Content(
         },
         modifier = modifier
     ) { padding ->
+
         Text(state.description, Modifier.padding(padding))
     }
+}
+
+@Preview
+@Composable
+fun HomeTabRoutePreview() {
+    HomeScreen(
+        state = HomeUiState.Success(
+            title = "Очень длинный заголовок, который не вмещается",
+            description = "Описание"
+        ),
+        onGoBack = { }
+    )
 }

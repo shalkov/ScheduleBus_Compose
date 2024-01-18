@@ -12,6 +12,15 @@ dependencies {
     implementation(project(":app"))
     implementation(project(":core:testing"))
     implementation(project(":data"))
+    implementation(project(":domain"))
     implementation(project(":feature:main"))
     implementation(project(":feature:splash"))
+
+    //Ktor Client (поправить зависимости, чтобы не было дублирования с модулем data)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.json)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.serialization)
+    implementation(libs.ktor.client.content.negotiation)
 }
