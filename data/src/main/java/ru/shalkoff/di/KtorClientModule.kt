@@ -24,15 +24,36 @@ object KtorClientModule {
 
     @Singleton
     @Provides
+    @Schedule
     fun provideKtorHttpClient(): HttpClient {
         return HttpClient(Android) {
             install(Logging) {
                 level = LogLevel.ALL
             }
             install(DefaultRequest) {
-                url(Urls.BASE_URL)
+                url(Urls.BASE_API_URL)
+            }
+            install(ContentNegotiation) {
+                json(Json {
+                    // игнорируем ошибку, если в response мы обрабатываем не все поля
+                    ignoreUnknownKeys = true
+                })
+            }
+        }
+    }
+
+    @Singleton
+    @Provides
+    @Cats
+    fun provideCatsKtorHttpClient(): HttpClient {
+        return HttpClient(Android) {
+            install(Logging) {
+                level = LogLevel.ALL
+            }
+            install(DefaultRequest) {
+                url(Urls.BASE_CAT_API_URL)
                 header(HttpHeaders.ContentType, ContentType.Application.Json)
-                header("x-api-key", Urls.API_KEY)
+                header("x-api-key", Urls.CAT_API_KEY)
             }
             install(ContentNegotiation) {
                 json(Json {

@@ -1,10 +1,11 @@
 package ru.shalkoff.main.tabs.home
 
+import ru.shalkoff.model.Schedules
+
 sealed interface HomeUiState {
 
     data object Loading : HomeUiState
-    data class Success(
-        val title: String,
-        val description: String
+    data class ShowContent(
+        val schedules: Schedules
     ) : HomeUiState
 }
