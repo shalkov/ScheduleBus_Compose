@@ -1,6 +1,7 @@
 package ru.shalkoff.repository
 
 import ru.shalkoff.model.Cat
+import ru.shalkoff.model.Schedule
 import ru.shalkoff.model.Schedules
 import ru.shalkoff.network.CatsApi
 import ru.shalkoff.network.SchedulesApi
@@ -18,5 +19,11 @@ class ScheduleRepository @Inject constructor(
 
     override suspend fun getAllSchedule(): Schedules {
        return scheduleApi.getAll().transform()
+    }
+
+    override suspend fun getRouteByNumber(
+        routeNumber: String
+    ): Schedule {
+        return scheduleApi.getByNumber(routeNumber).transform()
     }
 }

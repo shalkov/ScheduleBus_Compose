@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.shalkoff.R
+import ru.shalkoff.detail.DetailRoute
 import ru.shalkoff.main.MainRoute
 import ru.shalkoff.splash.SplashRoute
 
@@ -26,6 +27,16 @@ fun MainNavigation(
         }
         composable("main") {
             MainRoute(
+                openDetailScreen = { routeNumber ->
+                    navController.navigate("detail/${routeNumber}")
+                },
+                onGoBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+        composable("detail/{routeNumber}") {
+            DetailRoute(
                 onGoBack = {
                     navController.popBackStack()
                 }

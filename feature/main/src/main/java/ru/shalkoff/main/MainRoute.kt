@@ -1,10 +1,7 @@
 package ru.shalkoff.main
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -19,6 +16,7 @@ import ru.shalkoff.ui.bottombar.DropletButtonNavBar
 
 @Composable
 fun MainRoute(
+    openDetailScreen: (String) -> Unit,
     onGoBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: MainViewModel = hiltViewModel()
@@ -26,6 +24,7 @@ fun MainRoute(
     val uiState by viewModel.uiState.collectAsState()
 
     MainScreen(
+        openDetailScreen,
         viewModel = viewModel,
         uiState = uiState,
         modifier = modifier
@@ -34,6 +33,7 @@ fun MainRoute(
 
 @Composable
 internal fun MainScreen(
+    openDetailScreen: (String) -> Unit,
     viewModel: MainViewModel,
     uiState: MainUiState,
     modifier: Modifier = Modifier
@@ -42,7 +42,10 @@ internal fun MainScreen(
         content = { innerPadding ->
             when (uiState) {
                 MainUiState.HomeTabSelected -> {
-                    HomeTabRoute(onGoBack = { })
+                    HomeTabRoute(
+                        openDetailScreen,
+                        onGoBack = { }
+                    )
                 }
 
                 MainUiState.HeartTabSelected -> {

@@ -24,5 +24,6 @@ include(":core:testing")
 
 include(":feature:main")
 include(":feature:splash")
+include(":feature:detail")
 
 include(":test:navigation")
