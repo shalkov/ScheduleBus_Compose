@@ -21,6 +21,10 @@ class AuthViewModel @Inject constructor(
     )
     val uiState: StateFlow<AuthUiState> = _uiState
 
+    init {
+        auth("user", "user")
+    }
+
     fun auth(login: String, password: String) {
         viewModelScope.launch {
             _uiState.tryEmit(AuthUiState.Loading)

@@ -20,7 +20,7 @@ class AuthApi @Inject constructor(
         login: String,
         password: String
     ): AuthResponse {
-        return httpScheduleClient.post(Urls.ALL_SCHEDULE) {
+        return httpScheduleClient.post(Urls.AUTH) {
             contentType(ContentType.Application.Json)
             setBody(AuthRequest(login, password))
         }.body()

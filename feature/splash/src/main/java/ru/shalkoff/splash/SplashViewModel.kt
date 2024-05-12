@@ -31,7 +31,6 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch {
             val tokens = getTokensUseCase()
             if (tokens != null) {
-                // открываем главный экран
                 _uiState.tryEmit(SplashUiState.ShowMainScreen)
             } else {
                 _uiState.tryEmit(SplashUiState.ShowAuthScreen)

@@ -36,10 +36,14 @@ fun SplashRoute(
             }
         }
         SplashUiState.ShowAuthScreen -> {
-            openMainScreen()
+            LaunchedEffect(Unit) {
+                openAuthScreen()
+            }
         }
         SplashUiState.ShowMainScreen -> {
-            openAuthScreen()
+            LaunchedEffect(Unit) {
+                openMainScreen()
+            }
         }
     }
 }

@@ -7,17 +7,40 @@ import javax.inject.Inject
 
 class TokenStorage @Inject constructor(
     @ApplicationContext private val context: Context
-) : ITokenStorage {
+) {
+    private val sharedPreferences = context.getSharedPreferences(
+        PREF_NAME,
+        Context.MODE_PRIVATE
+    )
 
-    override fun saveTokens(tokens: Tokens) {
-        KeyStoreTokenHelper.saveTokens(context, tokens)
+    fun saveTokens(tokens: Tokens) {
+        val editor = sharedPreferences.edit()
+        editor.putString(ACCESS_TOKEN_KEY, tokens.accessToken)
+        editor.putString(REFRESH_TOKEN_KEY, tokens.refreshToken)
+        editor.apply()
     }
 
-    override fun getTokens(): Tokens? {
-        return KeyStoreTokenHelper.getTokens(context)
+    fun getTokens(): Tokens? {
+        val accessToken = sharedPreferences.getString(ACCESS_TOKEN_KEY, null)
+        val refreshToken = sharedPreferences.getString(REFRESH_TOKEN_KEY, null)
+        return if (accessToken != null && refreshToken != null) {
+            Tokens(accessToken, refreshToken)
+        } else {
+            null
+        }
     }
 
-    override fun clearTokens() {
-        KeyStoreTokenHelper.clearTokens(context)
+    fun clearTokens() {
+        val editor = sharedPreferences.edit()
+        editor.remove(ACCESS_TOKEN_KEY)
+        editor.remove(REFRESH_TOKEN_KEY)
+        editor.apply()
+    }
+
+    companion object {
+
+        private const val PREF_NAME = "TokenPrefs"
+        private const val ACCESS_TOKEN_KEY = "accessToken"
+        private const val REFRESH_TOKEN_KEY = "refreshToken"
     }
 }
