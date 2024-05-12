@@ -20,7 +20,8 @@ import kotlinx.coroutines.flow.collectLatest
 @Composable
 fun SplashRoute(
     splashLogo: Int,
-    openNextScreen: () -> Unit,
+    openMainScreen: () -> Unit,
+    openAuthScreen: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -31,8 +32,14 @@ fun SplashRoute(
         }
         SplashUiState.Success -> {
             LaunchedEffect(Unit) {
-                openNextScreen()
+                viewModel.openNextScreen()
             }
+        }
+        SplashUiState.ShowAuthScreen -> {
+            openMainScreen()
+        }
+        SplashUiState.ShowMainScreen -> {
+            openAuthScreen()
         }
     }
 }

@@ -14,6 +14,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":feature:auth"))
     implementation(project(":feature:main"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:detail"))

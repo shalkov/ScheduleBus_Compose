@@ -5,19 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "ru.shalkoff.feature.splash"
+    namespace = "ru.shalkoff.feature.auth"
 }
 
 dependencies {
-    implementation(project(":core:ui"))
-    implementation(project(":core:util"))
     implementation(project(":domain"))
+    implementation(project(":core:ui"))
 
     // Compose
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.hilt.navigation.compose)
-
-    //Lottie Animation
-    implementation(libs.lottie.animation.compose)
 }

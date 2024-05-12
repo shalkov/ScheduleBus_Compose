@@ -22,6 +22,7 @@ include(":core:ui")
 include(":core:util")
 include(":core:testing")
 
+include(":feature:auth")
 include(":feature:main")
 include(":feature:splash")
 include(":feature:detail")

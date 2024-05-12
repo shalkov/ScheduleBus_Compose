@@ -1,6 +1,6 @@
 package ru.shalkoff
 
-interface Transformable<T> {
+interface Transformable<out T> {
 
     fun transform(): T
 }
